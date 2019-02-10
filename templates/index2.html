@@ -116,6 +116,7 @@
       price02 = price01 + price04 + price05;
       $('#price1').text(price01.toString());
       $('#price2').text(price02.toString());
+      $('#price_2_hidden').val(price02.toString());
   }
 
   function buy1(){
@@ -161,9 +162,10 @@
 <button id="enter">入庫</button>　　
 <form name="form1" id="form1">
   <button id="exit" name="id" value="1">退場</button>
+  <input name="price" id="price_2_hidden" type="hidden" value="999"/>
 </form>
 <!-- <button id="exit">出庫</button>　　 -->
-<button id="buy1">買い物(デパート)</button>　　
+<button id="buy1">買い物(デパート)</button>
 <button id="buy2">買い物(食堂)</button><br><br><br>
 <button id="init">初期化</button>
 

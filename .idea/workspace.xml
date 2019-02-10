@@ -4,7 +4,7 @@
     <list default="true" id="2ee76bb5-0398-4cc9-99ae-094d326303b2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index2.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,14 +36,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="1" />
+          <entry key="html" value="2" />
           <entry key="js" value="3" />
           <entry key="py" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="1" />
+          <entry key="HTML" value="2" />
           <entry key="JavaScript" value="2" />
           <entry key="Python" value="4" />
           <entry key="Scratch" value="1" />
@@ -51,16 +51,16 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="133" />
+          <entry key="html" value="165" />
           <entry key="js" value="377" />
-          <entry key="py" value="1006" />
+          <entry key="py" value="1081" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="133" />
+          <entry key="HTML" value="165" />
           <entry key="JavaScript" value="377" />
-          <entry key="Python" value="1006" />
+          <entry key="Python" value="1081" />
         </counts>
       </usages-collector>
     </session>
@@ -70,23 +70,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="131" column="24" lean-forward="true" selection-start-line="131" selection-start-column="24" selection-end-line="131" selection-end-column="24" />
+            <state relative-caret-position="382">
+              <caret line="32" column="37" lean-forward="true" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
               <folding>
                 <element signature="e#0#59#0" expanded="true" />
-                <marker date="1549783435217" expanded="true" signature="1900:4537" ph="..." />
-                <marker date="1549783435217" expanded="true" signature="3786:3789" ph="..." />
-                <marker date="1549783435217" expanded="true" signature="5389:5394" ph="..." />
+                <marker date="1549784655984" expanded="true" signature="1996:4633" ph="..." />
+                <marker date="1549784655984" expanded="true" signature="3882:3885" ph="..." />
+                <marker date="1549784655984" expanded="true" signature="5485:5490" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/index2.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="265">
+              <caret line="167" column="28" lean-forward="true" selection-start-line="167" selection-start-column="28" selection-end-line="167" selection-end-column="28" />
+              <folding>
+                <element signature="n#style#0;n#text#1;n#p#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="17" column="9" lean-forward="true" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+            <state relative-caret-position="224">
+              <caret line="16" selection-start-line="15" selection-end-line="16" />
             </state>
           </provider>
         </entry>
@@ -133,6 +145,7 @@
       <find>pay_reserve_old</find>
       <find>pay/reserve</find>
       <find>fee_input</find>
+      <find>price02</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -142,8 +155,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/static/js/src/main.js" />
-        <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/templates/index2.html" />
       </list>
     </option>
   </component>
@@ -380,21 +394,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="131" column="24" lean-forward="true" selection-start-line="131" selection-start-column="24" selection-end-line="131" selection-end-column="24" />
+        <state relative-caret-position="382">
+          <caret line="32" column="37" lean-forward="true" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
           <folding>
             <element signature="e#0#59#0" expanded="true" />
-            <marker date="1549783435217" expanded="true" signature="1900:4537" ph="..." />
-            <marker date="1549783435217" expanded="true" signature="3786:3789" ph="..." />
-            <marker date="1549783435217" expanded="true" signature="5389:5394" ph="..." />
+            <marker date="1549784655984" expanded="true" signature="1996:4633" ph="..." />
+            <marker date="1549784655984" expanded="true" signature="3882:3885" ph="..." />
+            <marker date="1549784655984" expanded="true" signature="5485:5490" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="17" column="9" lean-forward="true" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+        <state relative-caret-position="224">
+          <caret line="16" selection-start-line="15" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="167" column="28" lean-forward="true" selection-start-line="167" selection-start-column="28" selection-end-line="167" selection-end-column="28" />
+          <folding>
+            <element signature="n#style#0;n#text#1;n#p#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
