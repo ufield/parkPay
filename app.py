@@ -64,7 +64,7 @@ def onExit():
     app.logger.info("IDL ==>> " + id)
 
     # id = 1;
-    fee_input = 100;
+    # fee_input = 100;
 
     # ==================================
     # fin = open(id + '.txt', 'r')
