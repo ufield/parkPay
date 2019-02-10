@@ -17,6 +17,47 @@ def index():
     return render_template('index.html')
 
 
+@app.route("/enter", methods=['GET'])
+def onEnter():
+    id = request.args.get('id')
+    # TODO: idと駐車時刻のひもづけ
+
+    return id
+
+@app.route("/exit", methods=['GET'])
+def onExit():
+    id = request.args.get('id')
+    # TODO: idから駐車時刻取得、現在時刻と比較して料金計算
+    # 料金計算終了したら、
+    # calculate_parking_fee
+
+    fee = 100
+
+
+    # return id
+
+
+def pay_reserve():
+    product_name = "チョコレート"
+    amount = 1
+    currency = "JPY"
+
+    (order_id, response) = pay.request_payments(product_name=product_name, amount=amount, currency=currency)
+    print(response["returnCode"])
+    print(response["returnMessage"])
+
+    transaction_id = response["info"]["transactionId"]
+    print(order_id, transaction_id, product_name, amount, currency)
+    obj = Transactions(transaction_id=transaction_id, order_id=order_id,
+                       product_name=product_name, amount=amount, currency=currency)
+    db.session.add(obj)
+    db.session.commit()
+    db.session.close()
+    redirect_url = response["info"]["paymentUrl"]["web"]
+    return redirect(redirect_url)
+
+
+
 @app.route("/pay/reserve", methods=['POST'])
 def pay_reserve():
     product_name = "チョコレート"
