@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+  <!-- <script src="https://code4fukui.github.io/egmapjs/egmap.js"></script> -->
+  <script src="https://yumu19.github.io/egmapjs/egmap.js"></script>
+  <link rel="stylesheet" href="https://code4fukui.github.io/egmapjs/egmap.css"/>
+  <script src="https://fukuno.jig.jp/fukuno.js"></script>
+  <script src="https://code4fukui.github.io/egmapjs/sparql.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+  <script>
+  // "use strict"
+  // var $ = require('jQuery');
+  var icons = new Array(100);
+
+  window.onload = function() {
+      var map = initMap('mapid')
+      map.setZoom(16)
+      map.panTo([ 35.943560,136.188917 ]) // 鯖江駅
+      // map.addIcon(35.943560,136.188917, "さばええき")
+
+      // SPARQLクエリー
+  	var query = `
+  		prefix ic: <http://imi.go.jp/ns/core/rdf#>
+  		prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+  		select ?uri ?name ?lat ?lng {
+  			?uri ic:名称 [ ic:表記 ?name ].
+  			?uri ic:地理座標 [ ic:緯度 ?lat; ic:経度 ?lng; ].
+  			filter(contains(str(?name),'駐車場'))
+  		} limit 100
+  	`
+  	querySPARQL(query, function(data) {
+  		var items = data.results.bindings;
+  		for (var i = 0; i < items.length; i++) {
+  			var item = items[i];
+  			var lat = item.lat.value;
+  			var lng = item.lng.value;
+  			var name = item.name.value;
+  			icons[i] = map.addIcon(lat, lng, name, "https://yumu19.github.io/egmapjs/icon-carparking.png", 64, 64)
+  		}
+  	});
+
+      init();
+
+      $('#exit').on('click', function() {
+          exit();
+      });
+      $('#enter').click(function() {
+          enter();
+      });
+      $('#buy1').click(function() {
+          buy1();
+      });
+      $('#buy2').click(function() {
+          buy2();
+      });
+      $('#init').click(function() {
+          init();
+      });
+  }
+
+  var price01 = 0;
+  var price02 = 0;
+  var price03 = 0;
+  var price04 = 0;
+  var price05 = 0;
+  var id;
+
+  function enter(){
+      $('#status').text("入庫中");
+      $('#status').css('background-color', '#BCEBFF');
+
+      for (var i = 0; i < icons.length; i++) {
+          icons[i] = null
+      }
+
+      id = setInterval("priceup()",2000);
+      enter2();
+  }
+
+  function exit(){
+      $('#status').text("出庫");
+      $('#status').css('background-color', '#CEFFBC');
+      clearInterval(id);
+      price03 = price02;
+      $('#price3').text(price03.toString());
+      exit2();
+  }
+
+  function init(){
+      $('#status').text("入庫前");
+      $('#status').css('background-color', '#FFD8BC');
+      clearInterval(id);
+      price01 = 0;
+      price02 = 0;
+      price03 = 0;
+      price04 = 0;
+      price05 = 0;
+      $('#price1').text(price01.toString());
+      $('#price2').text(price02.toString());
+      $('#price3').text(price03.toString());
+      $('#price4').text(price04.toString());
+      $('#price5').text(price05.toString());
+  }
+
+  function priceup(){
+      price01 += 100;
+      price02 = price01 + price04 + price05;
+      $('#price1').text(price01.toString());
+      $('#price2').text(price02.toString());
+  }
+
+  function buy1(){
+      price04 = -50;
+      $('#price4').text("(Bデパートご利用)"+price04.toString());
+  }
+
+  function buy2(){
+      price05 = -50;
+      $('#price5').text("(C食堂ご利用)"+price04.toString());
+  }
+
+
+  </script>
+
+  <style>
+  body { margin: 0; font-family: sans-serif; text-align: center; }
+  /* h1 { font-size: 5vw; margin: 0; } */
+  #mapid { height: 30vh; }
+  </style>
+</head>
+
+<body>
+  <!-- <p>決済方法を選択してください</p>
+  <form action="/pay/reserve" method="post">
+    <button type="submit"><img src="/static/img/linepay_logo.png"></img></button>
+  </form> -->
+
+<h1 id="status"></h1>
+
+
+<p><text>現在の料金</text>　　　<text id="price1" style="font-size:x-large;">0</text>　円</p>
+<p><text>支払い料金</text>　　　<text id="price2" style="font-size:x-large;">0</text>　円</p>
+<h3>料金明細</h3>
+<p><text>駐車料金</text>　　　<text id="price3" style="font-size:x-large;">0</text>　円</p>
+<p><text>割引料金</text>　　　<text id="price4" style="font-size:x-large;">0</text>　円</p>
+<p><text>割引料金</text>　　　<text id="price5" style="font-size:x-large;">0</text>　円</p>
+
+<div id="mapid"></div>
+
+<br><br><br><br>
+
+<button id="enter">入庫</button>　　
+<form name="form1" id="form1">
+  <button id="exit" name="id" value="1">退場</button>
+</form>
+<!-- <button id="exit">出庫</button>　　 -->
+<button id="buy1">買い物(デパート)</button>　　
+<button id="buy2">買い物(食堂)</button><br><br><br>
+<button id="init">初期化</button>
+
+<form name="form1" id="form1">
+  <button id="exit" name="id" value="1">退場</button>
+</form>
+
+<script type="text/javascript" src="static/js/lib/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="static/js/src/main2.js"></script>
+
+
+
+
+</body>
+</html>
