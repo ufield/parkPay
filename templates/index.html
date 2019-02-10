@@ -5,8 +5,14 @@
 </head>
 <body>
   <p>決済方法を選択してください</p>
-  <form action="/pay/reserve" method="post">
-    <button type="submit"><img src="/static/img/linepay_logo.png"></img></button>
-  </form>
+{#  <form action="/pay/reserve" method="post">#}
+{#    <button type="submit"><img src="/static/img/linepay_logo.png"></img></button>#}
+    <button id="enter">入場</button>
+    <button id="exit">退場</button>
+{#  </form>#}
+
+  <script type="text/javascript" src="static/js/lib/jquery-3.3.1.js"></script>
+  <script type="text/javascript" src="static/js/src/main.js"></script>
+
 </body>
 </html>
