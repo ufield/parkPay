@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, request
 from line_pay import LinePay
 from models import db, db_url, Transactions
 import socket
-
+import datetime
 
 
 LINE_PAY_URL = 'https://sandbox-api-pay.line.me'
@@ -47,9 +47,14 @@ def index():
 @app.route("/enter", methods=['GET'])
 def onEnter():
     id = request.args.get('id')
-    # TODO: idと駐車時刻のひもづけ (ファイル出力)
 
-    return id
+    f = open(id + '.txt', 'w')
+    now = datetime.datetime.now()
+    n = now.strftime("%Y/%m/%d %H:%M:%S")
+    f.write(n)
+    f.close()
+
+    return n # 駐車時刻を返す
 
 @app.route("/exit", methods=['GET'])
 def onExit():
@@ -58,10 +63,33 @@ def onExit():
     # TODO: idから駐車時刻取得 (ファイル読み込み)
 
 
+    # ==================================
+    fin = open(id + '.txt', 'r')
+    line = fin.read()
+    fin.close()
+
+    a = line.split(' ')[0]
+    b = line.split(' ')[1]
+
+    year  = a.split('/')[0]
+    month = a.split('/')[1]
+    day   = a.split('/')[2]
+
+    hour   = b.split(':')[0]
+    minute = b.split(':')[1]
+    second = b.split(':')[2]
+
+    date1 = datetime.datetime(int(year), int(month), int(day), int(hour), int(minute), int(second))
+    date2 = datetime.datetime.now()
+    date_sub = date2 - date1
+    parking_time = date_sub.seconds
+
+
     # 現在時刻と比較して料金計算 -> 10 yen/second
     rate   = 10
-    second = 10
-    fee_tmp = rate * second
+    # second = 10
+    fee_tmp = rate * parking_time
+
 
     # 料金計算終了したら、
     # calculate_parking_fee
@@ -72,8 +100,9 @@ def onExit():
 
     # =============================
     # fee_input = 100
+    amount = fee_tmp
 
-    amount = fee_input # UI側から渡された料金で上書き
+    # amount = fee_input # UI側から渡された料金で上書き
     currency = "JPY"
     product_name = "駐車料金" # TODO: 駐車時間含められるとなおよい
 

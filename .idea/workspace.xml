@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ee76bb5-0398-4cc9-99ae-094d326303b2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/js/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,30 +51,30 @@
         <counts>
           <entry key="html" value="25" />
           <entry key="js" value="345" />
-          <entry key="py" value="758" />
+          <entry key="py" value="981" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="25" />
           <entry key="JavaScript" value="345" />
-          <entry key="Python" value="758" />
+          <entry key="Python" value="981" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="57" column="33" lean-forward="true" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
+            <state relative-caret-position="200">
+              <caret line="102" column="20" selection-start-line="102" selection-start-column="20" selection-end-line="102" selection-end-column="20" />
               <folding>
                 <element signature="e#0#59#0" expanded="true" />
-                <marker date="1549777296348" expanded="true" signature="1781:3703" ph="..." />
-                <marker date="1549777296348" expanded="true" signature="2952:2955" ph="..." />
-                <marker date="1549777296348" expanded="true" signature="4555:4560" ph="..." />
+                <marker date="1549779918048" expanded="true" signature="1900:4406" ph="..." />
+                <marker date="1549779918048" expanded="true" signature="3655:3658" ph="..." />
+                <marker date="1549779918048" expanded="true" signature="5258:5263" ph="..." />
               </folding>
             </state>
           </provider>
@@ -106,7 +103,7 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/js/src/main.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="442">
@@ -150,9 +147,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app.py" />
         <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/static/js/src/main.js" />
+        <option value="$PROJECT_DIR$/app.py" />
       </list>
     </option>
   </component>
@@ -373,26 +370,6 @@
     <entry file="file://$PROJECT_DIR$/static/js/lib/jquery-3.3.1.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/line_pay.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="18" column="50" lean-forward="true" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="57" column="33" lean-forward="true" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-            <marker date="1549777296348" expanded="true" signature="1781:3703" ph="..." />
-            <marker date="1549777296348" expanded="true" signature="2952:2955" ph="..." />
-            <marker date="1549777296348" expanded="true" signature="4555:4560" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -404,6 +381,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="43" column="6" lean-forward="true" selection-start-line="43" selection-start-column="6" selection-end-line="43" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/line_pay.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="18" column="50" lean-forward="true" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="102" column="20" selection-start-line="102" selection-start-column="20" selection-end-line="102" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+            <marker date="1549779918048" expanded="true" signature="1900:4406" ph="..." />
+            <marker date="1549779918048" expanded="true" signature="3655:3658" ph="..." />
+            <marker date="1549779918048" expanded="true" signature="5258:5263" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
