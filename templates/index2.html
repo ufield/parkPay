@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
   <!-- <script src="https://code4fukui.github.io/egmapjs/egmap.js"></script> -->
@@ -12,10 +13,12 @@
   <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
+
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
+  <link rel="stylesheet" type="text/css" href="static/css/style.css">
   <script>
   // "use strict"
   // var $ = require('jQuery');
@@ -74,7 +77,12 @@
   var price05 = 0;
   var id;
 
+  var inPark = false; // false -> 駐車場外, true -> 駐車場内
+
   function enter(){
+      if(inPark) return false; // すでに入庫中なら何もしない
+      inPark = true;
+
       $('#status').text("入庫中");
       $('#status').css('background-color', '#BCEBFF');
 
@@ -87,6 +95,8 @@
   }
 
   function exit(){
+      if(!inPark) return false; // 入庫中しているなら何もしない
+
       $('#status').text("出庫");
       $('#status').css('background-color', '#CEFFBC');
       clearInterval(id);
@@ -96,6 +106,7 @@
   }
 
   function init(){
+      inPark = false;
       $('#status').text("入庫前");
       $('#status').css('background-color', '#FFD8BC');
       clearInterval(id);
@@ -139,45 +150,46 @@
   </style>
 </head>
 
-<body>
-  <!-- <p>決済方法を選択してください</p>
-  <form action="/pay/reserve" method="post">
-    <button type="submit"><img src="/static/img/linepay_logo.png"></img></button>
-  </form> -->
+    <body>
+      <!-- <p>決済方法を選択してください</p>
+      <form action="/pay/reserve" method="post">
+        <button type="submit"><img src="/static/img/linepay_logo.png"></img></button>
+      </form> -->
 
-<h1 id="status"></h1>
-
-
-<p><text>現在の料金</text>　　　<text id="price1" style="font-size:x-large;">0</text>　円</p>
-<p><text>支払い料金</text>　　　<text id="price2" style="font-size:x-large;">0</text>　円</p>
-<h3>料金明細</h3>
-<p><text>駐車料金</text>　　　<text id="price3" style="font-size:x-large;">0</text>　円</p>
-<p><text>割引料金</text>　　　<text id="price4" style="font-size:x-large;">0</text>　円</p>
-<p><text>割引料金</text>　　　<text id="price5" style="font-size:x-large;">0</text>　円</p>
-
-<div id="mapid"></div>
-
-<br><br><br><br>
-
-<button id="enter">入庫</button>　　
-<form name="form1" id="form1">
-  <button id="exit" name="id" value="1">退場</button>
-  <input name="price" id="price_2_hidden" type="hidden" value="999"/>
-</form>
-<!-- <button id="exit">出庫</button>　　 -->
-<button id="buy1">買い物(デパート)</button>
-<button id="buy2">買い物(食堂)</button><br><br><br>
-<button id="init">初期化</button>
-
-<form name="form1" id="form1">
-  <button id="exit" name="id" value="1">退場</button>
-</form>
-
-<script type="text/javascript" src="static/js/lib/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="static/js/src/main2.js"></script>
+        <h1 id="status"></h1>
 
 
+        <p><text>現在の料金</text>　　　<text id="price1" style="font-size:x-large;">0</text>　円</p>
+        <p><text>支払い料金</text>　　　<text id="price2" style="font-size:x-large;">0</text>　円</p>
+        <h3>料金明細</h3>
+        <p><text>駐車料金</text>　　　<text id="price3" style="font-size:x-large;">0</text>　円</p>
+        <p><text>割引料金</text>　　　<text id="price4" style="font-size:x-large;">0</text>　円</p>
+        <p><text>割引料金</text>　　　<text id="price5" style="font-size:x-large;">0</text>　円</p>
+
+        <div id="mapid"></div>
+
+        <br><br>
+{#        <br><br>#}
 
 
-</body>
+        <div id="enter-exit">
+            <button id="enter">入庫</button>
+            <form name="form1" id="form1">
+              <button id="exit" name="id" value="1">退場</button>
+              <input name="price" id="price_2_hidden" type="hidden" value="999"/>
+            </form>
+        </div>
+
+        <div style="clear: both"></div>
+        <button id="buy1">買い物(デパート)</button>
+        <button id="buy2">買い物(食堂)</button><br><br>
+        <button id="init">初期化</button>
+
+        <script type="text/javascript" src="static/js/lib/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="static/js/src/main2.js"></script>
+
+
+
+
+    </body>
 </html>

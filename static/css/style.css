@@ -1,0 +1,16 @@
+#enter-exit{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+#enter{
+    float: left;
+    left: auto;
+}
+
+#form1{
+    float: left;
+    margin-left: 50px;
+}
+

@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, request
+#from flask_httpauth import HTTPDigestAuth
 from line_pay import LinePay
 from models import db, db_url, Transactions
 import socket
@@ -9,15 +10,18 @@ LINE_PAY_URL = 'https://sandbox-api-pay.line.me'
 LINE_PAY_CHANNEL_ID = '1645473427'
 LINE_PAY_CHANNEL_SECRET = '123b3744d3200b5a9c9ded007c7b48e2'
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret key here'
 
 ip_host = socket.gethostbyname(socket.gethostname())
 # LINE_PAY_CONFIRM_URL = 'http://localhost:5000/pay/confirm'
 # LINE_PAY_CONFIRM_URL = 'http://localhost:5000/pay/confirm'
-LINE_PAY_CONFIRM_URL = 'http://'+ ip_host +':5000/pay/confirm'
+# LINE_PAY_CONFIRM_URL = 'http://'+ ip_host +':5000/pay/confirm'
+LINE_PAY_CONFIRM_URL = 'http://192.168.2.100:5000/pay/confirm'
 app.logger.info("LINE_PAY_CONFIRM_URL ==>> " + LINE_PAY_CONFIRM_URL)
 pay = LinePay(channel_id=LINE_PAY_CHANNEL_ID, channel_secret=LINE_PAY_CHANNEL_SECRET,
               line_pay_url=LINE_PAY_URL, confirm_url=LINE_PAY_CONFIRM_URL)
 
+# auth = HTTPDigestAuth()
 
 
 # def pay_reserve(id, fee):
@@ -39,12 +43,25 @@ pay = LinePay(channel_id=LINE_PAY_CHANNEL_ID, channel_secret=LINE_PAY_CHANNEL_SE
 #     redirect_url = response["info"]["paymentUrl"]["web"]
 #     return redirect(redirect_url)
 
+# users = {
+#     "test": "s2YpJSWU"
+# }
+
+
+# @auth.get_password
+# def get_pw(username):
+#     if username in users:
+#         return users.get(username)
+#     return None
+
+
 @app.route("/", methods=['GET'])
 def index():
     return render_template('index.html')
 
 
-@app.route("/index2", methods=['GET'])
+@app.route("/pp_demo", methods=['GET'])
+# @auth.login_required
 def index2():
     return render_template('index2.html')
 
