@@ -55,15 +55,15 @@ pay = LinePay(channel_id=LINE_PAY_CHANNEL_ID, channel_secret=LINE_PAY_CHANNEL_SE
 #     return None
 
 
-@app.route("/", methods=['GET'])
-def index():
-    return render_template('index.html')
+# @app.route("/", methods=['GET'])
+# def index():
+#     return render_template('index.html')
 
 
 @app.route("/pp_demo", methods=['GET'])
 # @auth.login_required
-def index2():
-    return render_template('index2.html')
+def top():
+    return render_template('top.html')
 
 @app.route("/enter", methods=['GET'])
 def onEnter():
@@ -209,7 +209,7 @@ def pay_confirm():
     db.session.query(Transactions).filter(Transactions.transaction_id == transaction_id).delete()
     db.session.commit()
     db.session.close()
-    return "Payment successfully finished."
+    return render_template('payment_complete.html', price=int(obj.amount))
 
 
 def initialize_app(app: Flask) -> None:
