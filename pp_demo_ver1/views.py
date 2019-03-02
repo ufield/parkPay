@@ -9,7 +9,7 @@ LINE_PAY_URL = 'https://sandbox-api-pay.line.me'
 LINE_PAY_CHANNEL_ID = '1645473427'
 LINE_PAY_CHANNEL_SECRET = '123b3744d3200b5a9c9ded007c7b48e2'
 
-app_name = 'pp_demo_ver0'
+app_name = 'pp_demo_ver1'
 
 ip_host = socket.gethostbyname(socket.gethostname())
 # app.logger.info("LINE_PAY_CONFIRM_URL ==>> " + LINE_PAY_CONFIRM_URL)
@@ -19,17 +19,17 @@ pay = LinePay(channel_id=LINE_PAY_CHANNEL_ID, channel_secret=LINE_PAY_CHANNEL_SE
               line_pay_url=LINE_PAY_URL, confirm_url=LINE_PAY_CONFIRM_URL)
 
 
-ver0 = Blueprint(app_name,
+ver1 = Blueprint(app_name,
                   __name__,
                   url_prefix='/' + app_name,
-                  template_folder='./templates',
-                  static_folder='./static')
+                  template_folder='templates',
+                  static_folder='static')
 
-@ver0.route("/", methods=['GET'])
+@ver1.route("/", methods=['GET'])
 def top():
     return render_template(app_name + '/top.html')
 
-@ver0.route("/pay/confirm", methods=['GET'])
+@ver1.route("/pay/confirm", methods=['GET'])
 def pay_confirm():
     transaction_id = request.args.get('transactionId')
     obj = Transactions.query.filter_by(transaction_id=transaction_id).one_or_none()
@@ -47,7 +47,7 @@ def pay_confirm():
 
 
 
-@ver0.route("/enter", methods=['GET'])
+@ver1.route("/enter", methods=['GET'])
 def onEnter():
     id = request.args.get('id')
 
@@ -60,7 +60,7 @@ def onEnter():
     return n # 駐車時刻を返す
 
 
-@ver0.route("/exit", methods=['GET'])
+@ver1.route("/exit", methods=['GET'])
 def onExit():
     id = request.args.get('id')
     fee_input = request.args.get('price')
