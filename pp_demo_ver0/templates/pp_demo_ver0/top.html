@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+  <!-- <script src="https://code4fukui.github.io/egmapjs/egmap.js"></script> -->
+  <script src="https://yumu19.github.io/egmapjs/egmap.js"></script>
+  <link rel="stylesheet" href="https://code4fukui.github.io/egmapjs/egmap.css"/>
+  <script src="https://fukuno.jig.jp/fukuno.js"></script>
+  <script src="https://code4fukui.github.io/egmapjs/sparql.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+
+</head>
+
+    <body>
+
+        <h2 id="status"></h2>
+
+        <div id="payment_details">
+            <h4 id="">料金明細</h4>
+            <p><text>駐車料金</text>　　　<text id="park-fee" class="price">0</text>　円</p>
+            <p><text>割引料金</text>　　　<text id="discount1" class="price discount">0</text>　円</p>
+            <p><text>割引料金</text>　　　<text id="discount2" class="price discount">0</text>　円</p>
+            <p id="payment_amount"><text>支払い料金</text>　　　<text id="amount" class="price">0</text>　円</p>
+        </div>
+
+        <div id="mapid"></div>
+
+        <br><br>
+
+
+        <div id="enter-exit">
+            <button id="enter">入庫</button>
+            <form name="form1" id="form1">
+              <button id="exit" name="id" value="1">退場</button>
+              <input name="price" id="price_2_hidden" type="hidden" value="0"/>
+            </form>
+        </div>
+
+        <div style="clear: both"></div>
+        <button id="buy1">買い物(デパート)</button>
+        <button id="buy2">買い物(食堂)</button>
+        <br>
+        <button id="init">初期化</button>
+
+        <script type="text/javascript" src="static/js/lib/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="static/js/src/functions/payment_funcs.js"></script>
+        <script type="text/javascript" src="static/js/src/functions/map_funcs.js"></script>
+        <script type="text/javascript" src="static/js/src/functions/car_funcs.js"></script>
+        <script type="text/javascript" src="static/js/src/presenter/button_events.js"></script>
+        <script type="text/javascript" src="static/js/src/main.js"></script>
+
+    </body>
+</html>
