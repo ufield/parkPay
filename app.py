@@ -13,8 +13,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret key here'
 
 ip_host = socket.gethostbyname(socket.gethostname())
-# LINE_PAY_CONFIRM_URL = 'http://localhost:5000/pay/confirm'
-# LINE_PAY_CONFIRM_URL = 'http://localhost:5000/pay/confirm'
 # LINE_PAY_CONFIRM_URL = 'http://'+ ip_host +':5000/pay/confirm'
 LINE_PAY_CONFIRM_URL = 'http://192.168.2.100:5000/pay/confirm'
 app.logger.info("LINE_PAY_CONFIRM_URL ==>> " + LINE_PAY_CONFIRM_URL)
@@ -22,7 +20,6 @@ pay = LinePay(channel_id=LINE_PAY_CHANNEL_ID, channel_secret=LINE_PAY_CHANNEL_SE
               line_pay_url=LINE_PAY_URL, confirm_url=LINE_PAY_CONFIRM_URL)
 
 # auth = HTTPDigestAuth()
-
 
 # def pay_reserve(id, fee):
 #     product_name = "駐車料金" # TODO: 駐車時間含められるとなおよい
@@ -117,11 +114,6 @@ def onExit():
 
     # 料金計算終了したら、
     # calculate_parking_fee
-
-
-
-
-
     # =============================
     # fee_input = 100
     # amount = fee_tmp
@@ -198,11 +190,8 @@ def pay_confirm():
     obj = Transactions.query.filter_by(transaction_id=transaction_id).one_or_none()
     if obj is None:
         raise Exception("Error: transaction_id not found.")
-    #
-
 
     response = pay.confirm_payments(transaction_id=transaction_id, amount=obj.amount, currency=obj.currency)
-    # response = pay.confirm_payments(transaction_id=dummy_id, amount=amount, currency=currency)
     print(response["returnCode"])
     print(response["returnMessage"])
     #

@@ -19,152 +19,20 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-  <script>
-  // "use strict"
-  // var $ = require('jQuery');
-  var icons = new Array(100);
 
-  window.onload = function() {
-      var map = initMap('mapid')
-      map.setZoom(16)
-      map.panTo([ 35.943560,136.188917 ]) // 鯖江駅
-      // map.addIcon(35.943560,136.188917, "さばええき")
-
-      // SPARQLクエリー
-  	var query = `
-  		prefix ic: <http://imi.go.jp/ns/core/rdf#>
-  		prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-  		select ?uri ?name ?lat ?lng {
-  			?uri ic:名称 [ ic:表記 ?name ].
-  			?uri ic:地理座標 [ ic:緯度 ?lat; ic:経度 ?lng; ].
-  			filter(contains(str(?name),'駐車場'))
-  		} limit 100
-  	`
-  	querySPARQL(query, function(data) {
-  		var items = data.results.bindings;
-  		for (var i = 0; i < items.length; i++) {
-  			var item = items[i];
-  			var lat = item.lat.value;
-  			var lng = item.lng.value;
-  			var name = item.name.value;
-  			icons[i] = map.addIcon(lat, lng, name, "https://yumu19.github.io/egmapjs/icon-carparking.png", 64, 64)
-  		}
-  	});
-
-      init();
-
-      $('#exit').on('click', function() {
-          exit();
-      });
-      $('#enter').click(function() {
-          enter();
-      });
-      $('#buy1').click(function() {
-          buy1();
-      });
-      $('#buy2').click(function() {
-          buy2();
-      });
-      $('#init').click(function() {
-          init();
-      });
-  }
-
-  var price01 = 0;
-  var price02 = 0;
-  var price03 = 0;
-  var price04 = 0;
-  var price05 = 0;
-  var id;
-
-  var inPark = false; // false -> 駐車場外, true -> 駐車場内
-
-  function enter(){
-      if(inPark) return false; // すでに入庫中なら何もしない
-      inPark = true;
-
-      $('#status').text("入庫中");
-      $('#status').css('background-color', '#BCEBFF');
-
-      for (var i = 0; i < icons.length; i++) {
-          icons[i] = null
-      }
-
-      id = setInterval("priceup()",2000);
-      enter2();
-  }
-
-  function exit(){
-      if(!inPark) return false; // 入庫中しているなら何もしない
-
-      $('#status').text("出庫");
-      $('#status').css('background-color', '#CEFFBC');
-      clearInterval(id);
-      price03 = price02;
-      $('#price3').text(price03.toString());
-      exit2();
-  }
-
-  function init(){
-      inPark = false;
-      $('#status').text("入庫前");
-      $('#status').css('background-color', '#FFD8BC');
-      clearInterval(id);
-      price01 = 0;
-      price02 = 0;
-      price03 = 0;
-      price04 = 0;
-      price05 = 0;
-      $('#price1').text(price01.toString());
-      $('#price2').text(price02.toString());
-      $('#price3').text(price03.toString());
-      $('#price4').text(price04.toString());
-      $('#price5').text(price05.toString());
-  }
-
-  function priceup(){
-      price01 += 100;
-      price02 = price01 + price04 + price05;
-      $('#price1').text(price01.toString());
-      $('#price2').text(price02.toString());
-      $('#price_2_hidden').val(price02.toString());
-  }
-
-  function buy1(){
-      price04 = -50;
-      $('#price4').text("(Bデパートご利用)"+price04.toString());
-  }
-
-  function buy2(){
-      price05 = -50;
-      $('#price5').text("(C食堂ご利用)"+price04.toString());
-  }
-
-
-  </script>
-
-  <style>
-  body { margin: 0; font-family: sans-serif; text-align: center; }
-  /* h1 { font-size: 5vw; margin: 0; } */
-  #mapid { height: 30vh; }
-  </style>
 </head>
 
     <body>
-      <!-- <p>決済方法を選択してください</p>
-      <form action="/pay/reserve" method="post">
-        <button type="submit"><img src="/static/img/linepay_logo.png"></img></button>
-      </form> -->
 
-        <h1 id="status"></h1>
+        <h2 id="status"></h2>
 
-
-        <p><text>現在の料金</text>　　　<text id="price1" style="font-size:x-large;">0</text>　円</p>
-        <p><text>支払い料金</text>　　　<text id="price2" style="font-size:x-large;">0</text>　円</p>
-        <h3>料金明細</h3>
-        <p><text>駐車料金</text>　　　<text id="price3" style="font-size:x-large;">0</text>　円</p>
-        <p><text>割引料金</text>　　　<text id="price4" style="font-size:x-large;">0</text>　円</p>
-        <p><text>割引料金</text>　　　<text id="price5" style="font-size:x-large;">0</text>　円</p>
+        <div id="payment_details">
+            <h4 id="">料金明細</h4>
+            <p><text>駐車料金</text>　　　<text id="park-fee" class="price">0</text>　円</p>
+            <p><text>割引料金</text>　　　<text id="discount1" class="price discount">0</text>　円</p>
+            <p><text>割引料金</text>　　　<text id="discount2" class="price discount">0</text>　円</p>
+            <p id="payment_amount"><text>支払い料金</text>　　　<text id="amount" class="price">0</text>　円</p>
+        </div>
 
         <div id="mapid"></div>
 
@@ -181,14 +49,16 @@
 
         <div style="clear: both"></div>
         <button id="buy1">買い物(デパート)</button>
-        <button id="buy2">買い物(食堂)</button><br><br>
+        <button id="buy2">買い物(食堂)</button>
+        <br>
         <button id="init">初期化</button>
 
         <script type="text/javascript" src="static/js/lib/jquery-3.3.1.js"></script>
-        <script type="text/javascript" src="static/js/src/main2.js"></script>
-
-
-
+        <script type="text/javascript" src="static/js/src/functions/payment_funcs.js"></script>
+        <script type="text/javascript" src="static/js/src/functions/map_funcs.js"></script>
+        <script type="text/javascript" src="static/js/src/functions/car_funcs.js"></script>
+        <script type="text/javascript" src="static/js/src/presenter/button_events.js"></script>
+        <script type="text/javascript" src="static/js/src/main.js"></script>
 
     </body>
 </html>
