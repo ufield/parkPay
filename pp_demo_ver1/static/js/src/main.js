@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    mapInit();
+    // mapInit();
+    map.init();
     paymentInit();
 
 });

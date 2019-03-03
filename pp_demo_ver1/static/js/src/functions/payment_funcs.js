@@ -5,7 +5,7 @@ var discount02 = 0;
 var id;
 
 function paymentInit(){
-  inPark = false;
+  car.inPark = false;
   $('#status').text("入庫前");
   $('#status').css('background-color', '#FFD8BC');
   clearInterval(id);
@@ -38,10 +38,6 @@ function buy2(){
 }
 
 
-// var enter_time;
-// var exit_time;
-// var price;
-// var rate = 10; // 1秒に10円課金
 
 // 入場時情報をサーバーへ渡す
 function setEnterInfo () {

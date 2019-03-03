@@ -2,9 +2,8 @@ body {
     margin: 0;
     font-family: sans-serif;
     text-align: center;
-    background-color: aliceblue;
 }
-#mapid {
+#map {
     height: 30vh;
     margin-bottom: -30px;
 }
