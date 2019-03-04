@@ -7,6 +7,7 @@ import socket
 import datetime
 from pp_demo_ver0.views import ver0
 from pp_demo_ver1.views import ver1
+from pp_demo_ver2.views import ver2
 
 LINE_PAY_URL = 'https://sandbox-api-pay.line.me'
 LINE_PAY_CHANNEL_ID = '1645473427'
@@ -217,6 +218,7 @@ pay = LinePay(channel_id=LINE_PAY_CHANNEL_ID, channel_secret=LINE_PAY_CHANNEL_SE
 
 app.register_blueprint(ver0, url_prefix='/pp_demo_ver0')
 app.register_blueprint(ver1, url_prefix='/pp_demo_ver1')
+app.register_blueprint(ver2, url_prefix='/pp_demo_ver2')
 
 
 def initialize_app(app) -> None:

@@ -6,7 +6,7 @@ map.parkingMarkers = [];
 map.infoWindows = [];
 map.meter2latdeg = 0.000008983148616; // 日本における1mを緯度経度換算(およその値)
 map.meter2lngdeg = 0.000010966382364; // 日本における1mを緯度経度換算(およその値)
-
+map.personMarker;
 
 map.init = function(){
     map._GMAP_ = new google.maps.Map(document.getElementById('map'), {
@@ -80,6 +80,8 @@ map.init = function(){
 
   // 車アイコンを置く
   car.setMap(pos.carInitial);
+  map.setDepartmentStore(pos.departmentStore);
+  map.setRestaurant(pos.restaurant);
 
 
 };
@@ -102,7 +104,82 @@ map.createRoute = function(from, to, steps){
 }
 
 
+map.setDepartmentStore = function(position){
+  var latLng = new google.maps.LatLng(position.lat, position.lng);
+  var iconUrl = "/static/img/icons8-company-96.png";
 
+  new google.maps.Marker(
+    {
+      map: map._GMAP_,
+      position: latLng,
+      icon: {
+        url: iconUrl,
+        scaledSize : new google.maps.Size(55, 55)
+      },
+      zIndex: 10,
+    }
+  );
+
+}
+
+map.setRestaurant = function(position){
+  var latLng = new google.maps.LatLng(position.lat, position.lng);
+  var iconUrl = "/static/img/icons8-dining-room-80.png";
+
+  new google.maps.Marker(
+    {
+      map: map._GMAP_,
+      position: latLng,
+      icon: {
+        url: iconUrl,
+        scaledSize : new google.maps.Size(45, 45)
+      },
+      zIndex: 10,
+    }
+  );
+
+}
+
+map.createPersonMarker = function(position){
+  var latLng  = new google.maps.LatLng(position.lat, position.lng);
+  var iconUrl = "/static/img/icons8-walking-filled-100.png";  // TODO: parking-icon
+
+  map.personMarker = new google.maps.Marker(
+    {
+      map: map._GMAP_,
+      position: latLng,
+      icon: {
+        url: iconUrl,
+        scaledSize : new google.maps.Size(45, 45)
+      },
+      zIndex: 100000,
+    }
+  );
+
+}
+
+
+map.moveMarker = function(marker, route){
+
+  var defer = $.Deferred();
+  var iRoute = 0;
+  var timer_id = setInterval(function(){
+    let lat = route[iRoute].lat;
+    let lng = route[iRoute].lng;
+
+    marker.setPosition(new google.maps.LatLng(lat, lng));
+
+    if(iRoute === route.length - 1){
+      defer.resolve();
+      clearInterval(timer_id);
+    }
+
+    iRoute++;
+
+  }, 10);
+
+  return defer.promise();
+}
 
 
 // var mapInit = function(){

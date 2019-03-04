@@ -14,3 +14,13 @@ pos.parkGoal = {
   lat: 35.943146,
   lng: 136.188217,
 }
+
+pos.restaurant = {
+  lat: 35.944446,
+  lng: 136.187617,
+}
+
+pos.departmentStore = {
+  lat: 35.942146,
+  lng: 136.186817,
+}

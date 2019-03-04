@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    text-align: center;
+}
+#map {
+    height: 30vh;
+    margin-bottom: -30px;
+}
+
+#enter-exit{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+#enter{
+    float: left;
+    left: auto;
+}
+
+#form1{
+    float: left;
+    margin-left: 50px;
+}
+
+#payment_amount{
+    /*color: */
+    font-size: 22px;
+}
+
+#payment_details h4{
+    text-decoration: underline;
+    line-height: 160%;
+}
+
+#payment_details {
+    font-size: 18px;
+    line-height: 120%;
+}
+
+.price{
+    font-size: 20px;
+}
+
+.discount{
+    color: blue;
+}
+
+#park-fee{
+    color: red;
+}
+
+#amount{
+    font-size: 26px;
+}
+
+#init{
+    margin-top: 10px;
+}
