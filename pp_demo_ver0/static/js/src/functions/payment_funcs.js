@@ -28,12 +28,12 @@ function priceup(){
 }
 
 function buy1(){
-  discount01 = -50;
+  discount01 = -100;
   $('#discount1').text("(Bデパートご利用)"+discount01.toString());
 }
 
 function buy2(){
-  discount02 = -50;
+  discount02 = -100;
   $('#discount2').text("(C食堂ご利用)"+discount02.toString());
 }
 

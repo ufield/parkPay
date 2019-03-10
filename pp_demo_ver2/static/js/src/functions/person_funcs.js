@@ -24,9 +24,23 @@ person.goDepartmentStore = function(){
     var promise = person.move(pos.restaurant, pos.departmentStore, 100)
   }
 
-  promise.then(function(){
-    buy1();
+  promise.then(function() {
+
+    setTimeout("buy1()", 1000);
     person.doneStore = true;
+
+    var d = new $.Deferred();
+    setTimeout(function () {
+      // 指定時間経過後にresolveしてdeferredを解決する
+      d.resolve();
+    }, 2000);
+
+    return d.promise();
+    // if(person.doneStore && person.doneRestaurant){
+    //
+    //   return person.moveToCar(pos.departmentStore, 100);
+//    }
+  }).then(function(){
     if(person.doneStore && person.doneRestaurant){
       return person.moveToCar(pos.departmentStore, 100);
     }
@@ -52,8 +66,20 @@ person.goRestaurant = function(){
   }
 
   promise.then(function(){
-    buy2();
+    setTimeout("buy2()", 1000);
     person.doneRestaurant = true;
+
+    var d = new $.Deferred();
+    setTimeout(function(){
+        // 指定時間経過後にresolveしてdeferredを解決する
+        d.resolve();
+    }, 2000);
+
+    return d.promise();
+    // if(person.doneStore && person.doneRestaurant){
+    //   return person.moveToCar(pos.restaurant, 100);
+    // }
+  }).then(function(){
     if(person.doneStore && person.doneRestaurant){
       return person.moveToCar(pos.restaurant, 100);
     }

@@ -1,7 +1,10 @@
-var parkFee = 0;
-var amount  = 0;
-var discount01 = 0;
-var discount02 = 0;
+var amount         = 0;
+var parkFee        = 0;
+var parkFeeRate    = 100;
+var discount01     = 0;
+var discountRate01 = -100;
+var discount02     = 0;
+var discountRate02 = -100;
 var id;
 
 function paymentInit(){
@@ -19,22 +22,32 @@ function paymentInit(){
   $('#discount2').text(discount02.toString());
 }
 
-function priceup(){
-  parkFee += 100;
-  amount = parkFee + discount01 + discount02;
+function updatePriceView(){
   $('#park-fee').text(parkFee.toString());
   $('#amount').text(amount.toString());
   $('#price_2_hidden').val(amount.toString());
 }
 
+
+function priceup(){
+  parkFee += parkFeeRate;
+  amount  += parkFeeRate;
+  if(amount < 0) amount = 0;
+  updatePriceView();
+}
+
 function buy1(){
-  discount01 = -50;
+  discount01 = discountRate01;
+  amount    += discountRate01;
   $('#discount1').text("(Bデパートご利用)"+discount01.toString());
+  updatePriceView();
 }
 
 function buy2(){
-  discount02 = -50;
+  discount02 = discountRate02;
+  amount    += discountRate02;
   $('#discount2').text("(C食堂ご利用)"+discount02.toString());
+  updatePriceView();
 }
 
 
