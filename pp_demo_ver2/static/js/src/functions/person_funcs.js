@@ -1,16 +1,39 @@
 var person = {};
 
+person.doneStore = false;
+person.doneRestaurant = false;
+
+person.init = function () {
+  person.doneStore = false;
+  person.doneRestaurant = false;
+  if(map.personMarker) map.personMarker.setMap(null);
+  map.personMarker = null;
+}
+
+
 person.goDepartmentStore = function(){
   // 車がパーキングにいることが前提
   if(!car.inPark) return;
-  var promise = person.moveFromCar(pos.departmentStore, 100);
+
+  if(!map.personMarker){
+    var carPos = {lat: map.carMarker.position.lat(), lng: map.carMarker.position.lng()}
+    map.createPersonMarker(carPos);
+    var promise = person.move(carPos, pos.departmentStore, 100);
+  } else{
+    // 人間が食堂にいる
+    var promise = person.move(pos.restaurant, pos.departmentStore, 100)
+  }
 
   promise.then(function(){
     buy1();
-    return person.moveToCar(pos.departmentStore, 100);
+    person.doneStore = true;
+    if(person.doneStore && person.doneRestaurant){
+      return person.moveToCar(pos.departmentStore, 100);
+    }
   }).done(function(){
-    map.personMarker.setMap(null);
-    map.personMarker = null;
+    if(person.doneStore && person.doneRestaurant){
+      person.init();
+    }
   });
 
 };
@@ -19,14 +42,25 @@ person.goDepartmentStore = function(){
 person.goRestaurant = function(){
   // 車がパーキングにいることが前提
   if(!car.inPark) return;
-  var promise = person.moveFromCar(pos.restaurant, 100);
+  if(!map.personMarker){
+    var carPos = {lat: map.carMarker.position.lat(), lng: map.carMarker.position.lng()}
+    map.createPersonMarker(carPos);
+    var promise = person.move(carPos, pos.restaurant, 100);
+  } else{
+    // 人間がデパートにいる
+    var promise = person.move(pos.departmentStore, pos.restaurant, 100)
+  }
 
   promise.then(function(){
     buy2();
-    return person.moveToCar(pos.restaurant, 100);
+    person.doneRestaurant = true;
+    if(person.doneStore && person.doneRestaurant){
+      return person.moveToCar(pos.restaurant, 100);
+    }
   }).done(function(){
-    map.personMarker.setMap(null);
-    map.personMarker = null;
+    if(person.doneStore && person.doneRestaurant){
+      person.init();
+    }
   });
 
 }
@@ -55,6 +89,18 @@ person.moveToCar = function(from, steps){
 
   var route = map.createRoute(from, carPos, steps);
 
+  return map.moveMarker(map.personMarker, route);
+
+}
+
+
+person.move = function(from, to, steps){
+  var route = map.createRoute(from, to, steps);
+  if(map.personMarker){
+    map.personMarker.setPosition(new google.maps.LatLng(from.lat, from.lng));
+  } else{
+    map.createPersonMarker(from);
+  }
   return map.moveMarker(map.personMarker, route);
 
 }

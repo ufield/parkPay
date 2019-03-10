@@ -34,7 +34,7 @@ function buy1(){
 
 function buy2(){
   discount02 = -50;
-  $('#discount2').text("(C食堂ご利用)"+discount01.toString());
+  $('#discount2').text("(C食堂ご利用)"+discount02.toString());
 }
 
 
