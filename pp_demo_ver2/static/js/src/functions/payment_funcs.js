@@ -37,15 +37,19 @@ function priceup(){
 }
 
 function buy1(){
-  discount01 = discountRate01;
-  amount    += discountRate01;
+  if(discount01 === 0) {
+    discount01 = discountRate01;
+    amount += discountRate01;
+  }
   $('#discount1').text("(Bデパートご利用)"+discount01.toString());
   updatePriceView();
 }
 
 function buy2(){
-  discount02 = discountRate02;
-  amount    += discountRate02;
+  if(discount02 === 0) {
+    discount02 = discountRate02;
+    amount += discountRate02;
+  }
   $('#discount2').text("(C食堂ご利用)"+discount02.toString());
   updatePriceView();
 }

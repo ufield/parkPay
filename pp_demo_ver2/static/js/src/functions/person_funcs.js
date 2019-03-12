@@ -15,6 +15,7 @@ person.goDepartmentStore = function(){
   // 車がパーキングにいることが前提
   if(!car.inPark) return;
 
+  disableButtons();
   if(!map.personMarker){
     var carPos = {lat: map.carMarker.position.lat(), lng: map.carMarker.position.lng()}
     map.createPersonMarker(carPos);
@@ -48,6 +49,8 @@ person.goDepartmentStore = function(){
     if(person.doneStore && person.doneRestaurant){
       person.init();
     }
+  }).always(function(){
+    enableButtons();
   });
 
 };
@@ -56,6 +59,8 @@ person.goDepartmentStore = function(){
 person.goRestaurant = function(){
   // 車がパーキングにいることが前提
   if(!car.inPark) return;
+
+  disableButtons();
   if(!map.personMarker){
     var carPos = {lat: map.carMarker.position.lat(), lng: map.carMarker.position.lng()}
     map.createPersonMarker(carPos);
@@ -87,7 +92,9 @@ person.goRestaurant = function(){
     if(person.doneStore && person.doneRestaurant){
       person.init();
     }
-  });
+  }).always(function(){
+    enableButtons();
+  });;
 
 }
 
